@@ -1,3 +1,3 @@
 # Styleable
 
-A description of this package.
+A declarative alternative to SwiftUI which uses UIKit

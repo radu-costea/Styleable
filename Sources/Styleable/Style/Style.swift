@@ -24,3 +24,10 @@ public struct Style<Target> {
         self.customization(target)
     }
 }
+
+extension Styleable {
+    public func style(_ styles: Style<Self>...) -> Self {
+        styles.forEach { $0.apply(to: self) }
+        return self
+    }
+}
