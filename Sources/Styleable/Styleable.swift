@@ -13,4 +13,9 @@ extension Styleable {
         value = self
         return self
     }
+    
+    public func assign(to value: inout Self?) -> Self {
+        value = self
+        return self
+    }
 }
