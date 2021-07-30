@@ -29,4 +29,9 @@ extension Styleable where Self: UIView {
         }
         return self
     }
+    
+    @discardableResult public func fixed(_ keyPath: KeyPath<Self, NSLayoutDimension>, value: CGFloat) -> Self {
+        self[keyPath: keyPath].constraint(equalToConstant: value).isActive = true
+        return self
+    }
 }
