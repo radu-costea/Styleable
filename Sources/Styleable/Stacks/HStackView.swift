@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 @objc
-public class HStackView: UIStackView {
+open class HStackView: UIStackView {
     public override var axis: NSLayoutConstraint.Axis {
         set { super.axis = .horizontal }
         get { .horizontal }
