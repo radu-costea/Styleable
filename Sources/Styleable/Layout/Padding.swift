@@ -21,7 +21,7 @@ public struct Padding {
 }
 
 extension Styleable where Self: UIView {
-    func padding(_ insets: UIEdgeInsets, relativeTo guide: UIView.Guide) -> Padding {
+    public func padding(_ insets: UIEdgeInsets, relativeTo guide: UIView.Guide) -> Padding {
         return Padding(insets: insets, relativeTo: guide) { self }
     }
 }
