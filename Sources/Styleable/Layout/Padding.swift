@@ -20,6 +20,12 @@ public struct Padding {
     }
 }
 
+extension Styleable where Self: UIView {
+    func padding(_ insets: UIEdgeInsets, relativeTo guide: UIView.Guide) -> Padding {
+        return Padding(insets: insets, relativeTo: guide) { self }
+    }
+}
+
 extension ArrayBuilder where T == Padding {
     public static func buildExpression(_ expression: UIView) -> ArrayBuilder<T>.Component {
         return [Padding(insets: .zero, relativeTo: .edges) {
