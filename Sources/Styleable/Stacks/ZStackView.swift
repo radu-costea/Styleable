@@ -10,7 +10,7 @@ import UIKit
 
 @objc
 open class ZStackView: UIView {
-    open convenience init(@ArrayBuilder<Padding> _ paddingsBuilder: @escaping () -> [Padding]) {
+    public convenience init(@ArrayBuilder<Padding> _ paddingsBuilder: @escaping () -> [Padding]) {
         self.init()
         self.embed(paddingsBuilder)
     }

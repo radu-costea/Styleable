@@ -8,4 +8,9 @@ extension Styleable {
         self[keyPath: keyPath] = value
         return self
     }
+    
+    public func assign(to value: inout Self) -> Self {
+        value = self
+        return self
+    }
 }
