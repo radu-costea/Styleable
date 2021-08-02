@@ -15,8 +15,11 @@ open class HStackView: UIStackView {
         get { .horizontal }
     }
     
-    public convenience init(@ArrayBuilder<UIView> _ arrangedSubviewsBuilder: () -> [UIView]) {
+    public convenience init(distribution: UIStackView.Distribution = .fill, spacing: CGFloat = 0, alignment: UIStackView.Alignment = .fill, @ArrayBuilder<UIView> _ arrangedSubviewsBuilder: () -> [UIView]) {
         self.init(arrangedSubviews: arrangedSubviewsBuilder())
         self.axis = .horizontal
+        self.distribution = distribution
+        self.spacing = spacing
+        self.alignment = alignment
     }
 }
