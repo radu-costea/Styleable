@@ -36,7 +36,7 @@ extension ArrayBuilder where T == Padding {
 }
 
 extension ArrayBuilder where T: UIView {
-    @available(*, unavailable, "Expected a UIView type instead of Padding")
+    @available(*, unavailable, message: "Expected a UIView type instead of Padding")
     public static func buildExpression(_ expression: Padding) -> ArrayBuilder<T>.Component {
         fatalError("Expression unavailable")
     }
