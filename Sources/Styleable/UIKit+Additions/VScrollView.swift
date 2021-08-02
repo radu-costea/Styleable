@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 
-class VScrollView: UIScrollView {
-    convenience init(_ buildContentView: () -> UIView) {
+open class VScrollView: UIScrollView {
+    public convenience init(_ buildContentView: () -> UIView) {
         self.init()
         self.embed {
             buildContentView()

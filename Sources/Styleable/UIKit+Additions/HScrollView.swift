@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 
-class HScrollView: UIScrollView {
-    convenience init(_ buildContentView: () -> UIView) {
+open class HScrollView: UIScrollView {
+    public convenience init(_ buildContentView: () -> UIView) {
         self.init()
         self.embed {
             buildContentView()
