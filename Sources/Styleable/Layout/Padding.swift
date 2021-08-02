@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+/// Describes how an array of views should be layed out in the containing view.
 public struct Padding {
     public var insets: UIEdgeInsets
     public var guide: ZStackView.Guide?
@@ -31,5 +32,12 @@ extension ArrayBuilder where T == Padding {
         return [Padding(insets: .zero, relativeTo: .edges) {
             expression
         }]
+    }
+}
+
+extension ArrayBuilder where T: UIView {
+    @available(*, unavailable, "Expected a UIView type instead of Padding")
+    public static func buildExpression(_ expression: Padding) -> ArrayBuilder<T>.Component {
+        fatalError("Expression unavailable")
     }
 }

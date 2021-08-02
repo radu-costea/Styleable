@@ -8,8 +8,9 @@
 import Foundation
 import UIKit
 
-@objc
-open class HStackView: UIStackView {
+
+/// A subclass of UIStackView specialized for laying out views horizontally
+@objc open class HStackView: UIStackView {
     public override var axis: NSLayoutConstraint.Axis {
         set { super.axis = .horizontal }
         get { .horizontal }

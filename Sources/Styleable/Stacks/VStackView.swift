@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 
-@objc
-open class VStackView: UIStackView {
+/// A subclass of UIStackView specialized for laying out views vertically
+@objc open class VStackView: UIStackView {
     public override var axis: NSLayoutConstraint.Axis {
         set { super.axis = .vertical }
         get { .vertical }

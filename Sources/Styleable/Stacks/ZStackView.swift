@@ -8,8 +8,9 @@
 import Foundation
 import UIKit
 
-@objc
-open class ZStackView: UIView {
+/// A subclass of UIView specialized for laying out views one on top of the other.
+/// The last view in the array being the most visible
+@objc open class ZStackView: UIView {
     public convenience init(@ArrayBuilder<Padding> _ paddingsBuilder: @escaping () -> [Padding]) {
         self.init()
         self.embed(paddingsBuilder)
