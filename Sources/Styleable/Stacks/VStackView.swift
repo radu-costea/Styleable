@@ -15,11 +15,18 @@ import UIKit
         get { .vertical }
     }
     
-    public convenience init(distribution: UIStackView.Distribution = .fill, spacing: CGFloat = 0, alignment: UIStackView.Alignment = .fill, @ArrayBuilder<UIView> _ arrangedSubviewsBuilder: () -> [UIView]) {
-        self.init(arrangedSubviews: arrangedSubviewsBuilder())
+    public required init(distribution: UIStackView.Distribution = .fill, spacing: CGFloat = 0, alignment: UIStackView.Alignment = .fill, @ArrayBuilder<UIView> _ arrangedSubviewsBuilder: () -> [UIView] = { [] }) {
+        super.init(frame: .zero)
+        let views = arrangedSubviewsBuilder()
+        views.forEach(self.addArrangedSubview(_:))
         self.axis = .vertical
         self.distribution = distribution
         self.spacing = spacing
         self.alignment = alignment
+    }
+    
+    required public init(coder: NSCoder) {
+        super.init(coder: coder)
+        self.axis = .vertical
     }
 }
