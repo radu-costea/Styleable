@@ -8,13 +8,14 @@
 import Foundation
 import UIKit
 
+/// UIScrollview that has the content view height equal to its bounds
 open class VScrollView: UIScrollView {
     public convenience init(_ buildContentView: () -> UIView) {
         self.init()
         self.embed {
             buildContentView()
-                .constrain(\.widthAnchor, to: self.widthAnchor, multiplier: 1.0)
-                .padding(.zero, relativeTo: .edges)
+                .constrain(\.widthAnchor, to: self.widthAnchor)
+                .padding(relativeTo: .edges)
         }
         
     }

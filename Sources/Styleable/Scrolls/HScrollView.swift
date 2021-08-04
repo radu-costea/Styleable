@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+/// UIScrollview that has the content view height equal to its bounds
 open class HScrollView: UIScrollView {
     public convenience init(_ buildContentView: () -> UIView) {
         self.init()

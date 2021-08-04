@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+/// View that can be subclassed
 open class StyleableView: UIView {
     public override init(frame: CGRect) {
         super.init(frame: frame)

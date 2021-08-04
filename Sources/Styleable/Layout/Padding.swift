@@ -22,8 +22,59 @@ public struct Padding {
 }
 
 extension Styleable where Self: UIView {
-    public func padding(_ insets: UIEdgeInsets, relativeTo guide: UIView.Guide) -> Padding {
+    public func padding(_ insets: UIEdgeInsets = .zero, relativeTo guide: UIView.Guide) -> Padding {
         return Padding(insets: insets, relativeTo: guide) { self }
+    }
+    
+    public func centeredHorizontally(in guide: UIView.Guide) -> Padding {
+        HStackView {
+            UIView()
+                .constrain(\.widthAnchor, value: 0)
+            
+            self
+            
+            UIView()
+                .constrain(\.widthAnchor, value: 0)
+        }
+        .with(\.distribution, .equalSpacing)
+        .with(\.alignment, .center)
+        .padding(.zero, relativeTo: guide)
+    }
+    
+    public func centeredVertically(in guide: UIView.Guide) -> Padding {
+        HStackView {
+            UIView()
+                .constrain(\.heightAnchor, value: 0)
+            
+            self
+            
+            UIView()
+                .constrain(\.heightAnchor, value: 0)
+        }
+        .with(\.distribution, .equalSpacing)
+        .with(\.alignment, .center)
+        .padding(.zero, relativeTo: guide)
+    }
+    
+    public func centered(in guide: UIView.Guide) -> Padding {
+        HStackView {
+            UIView().constrain(\.widthAnchor, value: 0)
+            
+            VStackView {
+                UIView().constrain(\.heightAnchor, value: 0)
+                
+                self
+                
+                UIView().constrain(\.heightAnchor, value: 0)
+            }
+            .with(\.distribution, .equalSpacing)
+            .with(\.alignment, .center)
+            
+            UIView().constrain(\.widthAnchor, value: 0)
+        }
+        .with(\.distribution, .equalSpacing)
+        .with(\.alignment, .center)
+        .padding(.zero, relativeTo: guide)
     }
 }
 
