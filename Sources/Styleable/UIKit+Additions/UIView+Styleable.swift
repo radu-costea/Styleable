@@ -35,7 +35,7 @@ extension Styleable where Self: UIView {
         return self
     }
     
-    @discardableResult public func proportional(_ keyPath: KeyPath<Self, NSLayoutDimension>, _ relation: NSLayoutConstraint.Relation = .equal, to anchor: @autoclosure @escaping () -> NSLayoutDimension, multiplier: CGFloat = 1.0, at priority: UILayoutPriority = .required) -> Self {
+    @discardableResult public func constrain(_ keyPath: KeyPath<Self, NSLayoutDimension>, _ relation: NSLayoutConstraint.Relation = .equal, to anchor: @autoclosure @escaping () -> NSLayoutDimension, multiplier: CGFloat = 1.0, at priority: UILayoutPriority = .required) -> Self {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             let constraint: NSLayoutConstraint
@@ -55,7 +55,7 @@ extension Styleable where Self: UIView {
         return self
     }
     
-    @discardableResult public func fixed(_ keyPath: KeyPath<Self, NSLayoutDimension>, _ relation: NSLayoutConstraint.Relation = .equal, value: CGFloat, at priority: UILayoutPriority = .required) -> Self {
+    @discardableResult public func constrain(_ keyPath: KeyPath<Self, NSLayoutDimension>, _ relation: NSLayoutConstraint.Relation = .equal, value: CGFloat, at priority: UILayoutPriority = .required) -> Self {
         let constraint: NSLayoutConstraint
         switch relation {
         case .equal:
@@ -75,12 +75,27 @@ extension Styleable where Self: UIView {
     public func centeredHorizontally(in guide: UIView.Guide) -> Padding {
         HStackView {
             UIView()
-                .fixed(\.widthAnchor, value: 0)
+                .constrain(\.widthAnchor, value: 0)
             
             self
             
             UIView()
-                .fixed(\.heightAnchor, value: 0)
+                .constrain(\.widthAnchor, value: 0)
+        }
+        .with(\.distribution, .equalSpacing)
+        .with(\.alignment, .center)
+        .padding(.zero, relativeTo: guide)
+    }
+    
+    public func centeredVertically(in guide: UIView.Guide) -> Padding {
+        HStackView {
+            UIView()
+                .constrain(\.heightAnchor, value: 0)
+            
+            self
+            
+            UIView()
+                .constrain(\.heightAnchor, value: 0)
         }
         .with(\.distribution, .equalSpacing)
         .with(\.alignment, .center)
@@ -89,22 +104,34 @@ extension Styleable where Self: UIView {
     
     public func centered(in guide: UIView.Guide) -> Padding {
         HStackView {
-            UIView().fixed(\.widthAnchor, value: 0)
+            UIView().constrain(\.widthAnchor, value: 0)
             
             VStackView {
-                UIView().fixed(\.heightAnchor, value: 0)
+                UIView().constrain(\.heightAnchor, value: 0)
                 
                 self
                 
-                UIView().fixed(\.heightAnchor, value: 0)
+                UIView().constrain(\.heightAnchor, value: 0)
             }
             .with(\.distribution, .equalSpacing)
             .with(\.alignment, .center)
             
-            UIView().fixed(\.widthAnchor, value: 0)
+            UIView().constrain(\.widthAnchor, value: 0)
         }
         .with(\.distribution, .equalSpacing)
         .with(\.alignment, .center)
         .padding(.zero, relativeTo: guide)
+    }
+    
+    // MARK: - Deprecations
+    
+    @available(*, deprecated, renamed: "constrain(_:_:value:at:)")
+    @discardableResult public func fixed(_ keyPath: KeyPath<Self, NSLayoutDimension>, _ relation: NSLayoutConstraint.Relation = .equal, value: CGFloat, at priority: UILayoutPriority = .required) -> Self {
+        fatalError("")
+    }
+    
+    @available(*, deprecated, renamed: "constrain(_:_:to:multiplier:at:)")
+    @discardableResult public func proportional(_ keyPath: KeyPath<Self, NSLayoutDimension>, _ relation: NSLayoutConstraint.Relation = .equal, to anchor: @autoclosure @escaping () -> NSLayoutDimension, multiplier: CGFloat = 1.0, at priority: UILayoutPriority = .required) -> Self {
+        fatalError("")
     }
 }
