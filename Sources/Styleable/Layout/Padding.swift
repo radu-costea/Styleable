@@ -27,53 +27,35 @@ extension Styleable where Self: UIView {
     }
     
     public func centeredHorizontally(in guide: UIView.Guide) -> Padding {
-        HStackView {
-            UIView()
-                .constrain(\.widthAnchor, value: 0)
-            
+        HStackView(distribution: .equalSpacing) {
+            UIView().constrain(\.widthAnchor, value: 0)
             self
-            
-            UIView()
-                .constrain(\.widthAnchor, value: 0)
+            UIView().constrain(\.widthAnchor, value: 0)
         }
-        .with(\.distribution, .equalSpacing)
-        .with(\.alignment, .center)
-        .padding(.zero, relativeTo: guide)
+        .padding(relativeTo: guide)
     }
     
     public func centeredVertically(in guide: UIView.Guide) -> Padding {
-        HStackView {
-            UIView()
-                .constrain(\.heightAnchor, value: 0)
-            
+        HStackView(distribution: .equalSpacing) {
+            UIView().constrain(\.heightAnchor, value: 0)
             self
-            
-            UIView()
-                .constrain(\.heightAnchor, value: 0)
+            UIView().constrain(\.heightAnchor, value: 0)
         }
-        .with(\.distribution, .equalSpacing)
-        .with(\.alignment, .center)
-        .padding(.zero, relativeTo: guide)
+        .padding(relativeTo: guide)
     }
     
     public func centered(in guide: UIView.Guide) -> Padding {
-        HStackView {
+        HStackView(distribution: .equalSpacing) {
             UIView().constrain(\.widthAnchor, value: 0)
             
-            VStackView {
+            VStackView(distribution: .equalSpacing) {
                 UIView().constrain(\.heightAnchor, value: 0)
-                
                 self
-                
                 UIView().constrain(\.heightAnchor, value: 0)
             }
-            .with(\.distribution, .equalSpacing)
-            .with(\.alignment, .center)
             
             UIView().constrain(\.widthAnchor, value: 0)
         }
-        .with(\.distribution, .equalSpacing)
-        .with(\.alignment, .center)
         .padding(.zero, relativeTo: guide)
     }
 }
