@@ -13,7 +13,7 @@ open class VScrollView: UIScrollView {
         self.init()
         self.embed {
             buildContentView()
-                .proportional(\.widthAnchor, to: self.widthAnchor, multiplier: 1.0)
+                .constrain(\.widthAnchor, to: self.widthAnchor, multiplier: 1.0)
                 .padding(.zero, relativeTo: .edges)
         }
         

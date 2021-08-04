@@ -13,7 +13,7 @@ open class HScrollView: UIScrollView {
         self.init()
         self.embed {
             buildContentView()
-                .proportional(\.heightAnchor, to: self.heightAnchor, multiplier: 1.0)
+                .constrain(\.heightAnchor, to: self.heightAnchor, multiplier: 1.0)
                 .padding(.zero, relativeTo: .edges)
         }
     }
