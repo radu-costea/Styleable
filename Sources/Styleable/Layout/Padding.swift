@@ -36,7 +36,7 @@ extension Styleable where Self: UIView {
     }
     
     public func centeredVertically(in guide: UIView.Guide) -> Padding {
-        HStackView(distribution: .equalSpacing) {
+        VStackView(distribution: .equalSpacing) {
             UIView().constrain(\.heightAnchor, value: 0)
             self
             UIView().constrain(\.heightAnchor, value: 0)
@@ -45,18 +45,12 @@ extension Styleable where Self: UIView {
     }
     
     public func centered(in guide: UIView.Guide) -> Padding {
-        HStackView(distribution: .equalSpacing) {
-            UIView().constrain(\.widthAnchor, value: 0)
-            
-            VStackView(distribution: .equalSpacing) {
-                UIView().constrain(\.heightAnchor, value: 0)
-                self
-                UIView().constrain(\.heightAnchor, value: 0)
-            }
-            
-            UIView().constrain(\.widthAnchor, value: 0)
+        VStackView(distribution: .equalSpacing) {
+            UIView().constrain(\.heightAnchor, value: 0)
+            self
+            UIView().constrain(\.heightAnchor, value: 0)
         }
-        .padding(.zero, relativeTo: guide)
+        .centeredHorizontally(in: guide)
     }
 }
 
