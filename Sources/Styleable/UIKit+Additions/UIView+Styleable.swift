@@ -11,7 +11,7 @@ import UIKit
 extension UIView: Styleable { }
 
 extension Styleable where Self: UIView {
-    func onTap(call action: Selector, on target: Any) -> Self {
+    public func onTap(call action: Selector, on target: Any) -> Self {
         let tapgesture = UITapGestureRecognizer()
         tapgesture.addTarget(target, action: action)
         addGestureRecognizer(tapgesture)
