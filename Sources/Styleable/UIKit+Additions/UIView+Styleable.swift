@@ -23,9 +23,34 @@ extension Styleable where Self: UIView {
     
     // MARK: - Constraints
     
-    @discardableResult public func constrain<T, C: NSLayoutAnchor<T>>(_ keyPath: KeyPath<Self, C>,
+    @discardableResult public func constrain(_ keyPath: KeyPath<Self, NSLayoutXAxisAnchor>,
                                                                    _ relation: NSLayoutConstraint.Relation = .equal,
-                                                                   to anchor: @autoclosure @escaping () -> C,
+                                                                   to anchor: @autoclosure @escaping () -> NSLayoutXAxisAnchor,
+                                                                   spacing value: CGFloat = 0.0,
+                                                                   at priority: UILayoutPriority = .required) -> Self {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            let constraint: NSLayoutConstraint
+            switch relation {
+            case .equal:
+                constraint = self[keyPath: keyPath].constraint(equalTo: anchor(), constant: value)
+            case .lessThanOrEqual:
+                constraint = self[keyPath: keyPath].constraint(lessThanOrEqualTo: anchor(), constant: value)
+            case .greaterThanOrEqual:
+                constraint = self[keyPath: keyPath].constraint(greaterThanOrEqualTo: anchor(), constant: value)
+            @unknown default:
+                fatalError("Unknown ")
+            }
+            
+            constraint.priority = priority
+            constraint.isActive = true
+        }
+        return self
+    }
+    
+    @discardableResult public func constrain(_ keyPath: KeyPath<Self, NSLayoutYAxisAnchor>,
+                                                                   _ relation: NSLayoutConstraint.Relation = .equal,
+                                                                   to anchor: @autoclosure @escaping () -> NSLayoutYAxisAnchor,
                                                                    spacing value: CGFloat = 0.0,
                                                                    at priority: UILayoutPriority = .required) -> Self {
         DispatchQueue.main.async { [weak self] in
