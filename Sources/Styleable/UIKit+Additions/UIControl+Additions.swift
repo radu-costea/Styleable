@@ -16,7 +16,7 @@ extension Styleable where Self: UIControl {
     ///   - selector: The method handling the action
     ///   - target: The target to call the method on
     /// - Returns: self
-    public func on(_ event: UIControl.Event, call selector: Selector, on target: Any?) -> Self {
+    @discardableResult public func on(_ event: UIControl.Event, call selector: Selector, on target: Any?) -> Self {
         self.addTarget(target, action: selector, for: event)
         return self
     }
@@ -30,7 +30,7 @@ extension Styleable where Self: UIControl {
     ///   - action: The handler for the action
     /// - Returns: self
     @available(iOS 14, *)
-    public func on(_ event: UIControl.Event, action: @escaping () -> Void) -> Self {
+    @discardableResult public func on(_ event: UIControl.Event, action: @escaping () -> Void) -> Self {
         self.addAction(.init { _ in
             action()
         }, for: event)

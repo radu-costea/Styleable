@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  StyleableView.swift
 //  
 //
 //  Created by Radu.Costea on 30.07.2021.
@@ -10,11 +10,12 @@ import UIKit
 
 /// View that can be subclassed
 open class StyleableView: UIView {
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
+    public init() {
+        super.init(frame: .zero)
         self.embed(self.buildSubviews)
     }
     
+    @available(*, unavailable)
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
         self.embed(self.buildSubviews)

@@ -23,10 +23,10 @@ extension Styleable where Self: UIView {
     
     // MARK: - Constraints
     
-    @discardableResult public func offset<T, C: NSLayoutAnchor<T>>(_ keyPath: KeyPath<Self, C>,
+    @discardableResult public func constrain<T, C: NSLayoutAnchor<T>>(_ keyPath: KeyPath<Self, C>,
                                                                    _ relation: NSLayoutConstraint.Relation = .equal,
                                                                    to anchor: @autoclosure @escaping () -> C,
-                                                                   value: CGFloat = 0.0,
+                                                                   spacing value: CGFloat = 0.0,
                                                                    at priority: UILayoutPriority = .required) -> Self {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -64,7 +64,7 @@ extension Styleable where Self: UIView {
     @discardableResult public func constrain(_ keyPath: KeyPath<Self, NSLayoutDimension>,
                                              _ relation: NSLayoutConstraint.Relation = .equal,
                                              to anchor: @autoclosure @escaping () -> NSLayoutDimension,
-                                             multiplier: CGFloat = 1.0,
+                                             times multiplier: CGFloat = 1.0,
                                              at priority: UILayoutPriority = .required) -> Self {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }

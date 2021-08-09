@@ -9,13 +9,18 @@ import Foundation
 import UIKit
 
 /// UIScrollview that has the content view height equal to its bounds
-open class HScrollView: UIScrollView {
-    public convenience init(_ buildContentView: () -> UIView) {
-        self.init()
+public class HScrollView: UIScrollView {
+    public init(_ buildContentView: () -> UIView) {
+        super.init(frame: .zero)
         self.embed {
             buildContentView()
-                .constrain(\.heightAnchor, to: self.heightAnchor, multiplier: 1.0)
+                .constrain(\.heightAnchor, to: self.heightAnchor)
                 .padding(.zero, relativeTo: .edges)
         }
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
     }
 }
