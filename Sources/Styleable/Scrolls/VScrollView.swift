@@ -14,7 +14,7 @@ public class VScrollView: UIScrollView {
         super.init(frame: .zero)
         self.embed {
             buildContentView()
-                .constrain(\.widthAnchor, to: self.widthAnchor)
+                .constrain(\.widthAnchor, equalTo: self.widthAnchor)
                 .padding(relativeTo: .edges)
         }
     }

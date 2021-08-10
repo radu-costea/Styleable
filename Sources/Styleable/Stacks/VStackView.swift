@@ -10,6 +10,7 @@ import UIKit
 
 /// A subclass of UIStackView specialized for laying out views vertically
 @objc public class VStackView: UIStackView {
+    @available(*, unavailable)
     public override var axis: NSLayoutConstraint.Axis {
         set { super.axis = .vertical }
         get { .vertical }
@@ -19,7 +20,7 @@ import UIKit
         super.init(frame: .zero)
         let views = arrangedSubviewsBuilder()
         views.forEach(self.addArrangedSubview(_:))
-        self.axis = .vertical
+        super.axis = .vertical
         self.distribution = distribution
         self.spacing = spacing
         self.alignment = alignment
@@ -28,6 +29,6 @@ import UIKit
     @available(*, unavailable)
     required public init(coder: NSCoder) {
         super.init(coder: coder)
-        self.axis = .vertical
+        super.axis = .vertical
     }
 }

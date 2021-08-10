@@ -28,27 +28,27 @@ extension Styleable where Self: UIView {
     
     public func centeredHorizontally(in guide: UIView.Guide) -> Padding {
         HStackView(distribution: .equalSpacing) {
-            UIView().constrain(\.widthAnchor, value: 0)
+            UIView().constrain(\.widthAnchor, equalTo: 0)
             self
-            UIView().constrain(\.widthAnchor, value: 0)
+            UIView().constrain(\.widthAnchor, equalTo: 0)
         }
         .padding(relativeTo: guide)
     }
     
     public func centeredVertically(in guide: UIView.Guide) -> Padding {
         VStackView(distribution: .equalSpacing) {
-            UIView().constrain(\.heightAnchor, value: 0)
+            UIView().constrain(\.heightAnchor, equalTo: 0)
             self
-            UIView().constrain(\.heightAnchor, value: 0)
+            UIView().constrain(\.heightAnchor, equalTo: 0)
         }
         .padding(relativeTo: guide)
     }
     
     public func centered(in guide: UIView.Guide) -> Padding {
         VStackView(distribution: .equalSpacing) {
-            UIView().constrain(\.heightAnchor, value: 0)
+            UIView().constrain(\.heightAnchor, equalTo: 0)
             self
-            UIView().constrain(\.heightAnchor, value: 0)
+            UIView().constrain(\.heightAnchor, equalTo: 0)
         }
         .centeredHorizontally(in: guide)
     }
