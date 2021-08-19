@@ -23,34 +23,55 @@ public struct Padding {
 
 extension Styleable where Self: UIView {
     public func padding(_ insets: UIEdgeInsets = .zero, relativeTo guide: UIView.Guide) -> Padding {
-        return Padding(insets: insets, relativeTo: guide) { self }
+        self.modify(.padding(insets, relativeTo: guide))
     }
     
-    public func centeredHorizontally(in guide: UIView.Guide) -> Padding {
-        HStackView(distribution: .equalSpacing) {
-            UIView().constrain(\.widthAnchor, equalTo: 0)
-            self
-            UIView().constrain(\.widthAnchor, equalTo: 0)
-        }
-        .padding(relativeTo: guide)
+    public func centeredHorizontally() -> UIView {
+        self.modify(.centeredHorizontally())
     }
     
-    public func centeredVertically(in guide: UIView.Guide) -> Padding {
-        VStackView(distribution: .equalSpacing) {
-            UIView().constrain(\.heightAnchor, equalTo: 0)
-            self
-            UIView().constrain(\.heightAnchor, equalTo: 0)
-        }
-        .padding(relativeTo: guide)
+    public func centeredVertically() -> UIView {
+        self.modify(.centeredVertically())
     }
     
-    public func centered(in guide: UIView.Guide) -> Padding {
-        VStackView(distribution: .equalSpacing) {
-            UIView().constrain(\.heightAnchor, equalTo: 0)
-            self
-            UIView().constrain(\.heightAnchor, equalTo: 0)
+    public func centered() -> UIView {
+        self.modify(.centered())
+    }
+}
+
+extension Modifier where Target: UIView, ModifiedTarget == Padding {
+    static func padding(_ insets: UIEdgeInsets = .zero, relativeTo guide: UIView.Guide) -> Modifier<Target, Padding> {
+        Modifier { view in
+            Padding(insets: insets, relativeTo: guide) { view }
         }
-        .centeredHorizontally(in: guide)
+    }
+}
+
+extension Modifier where Target: UIView, ModifiedTarget == UIView {
+    static func centered() -> Modifier<Target, UIView> {
+        Modifier { view in
+            view.modify(.centeredVertically(), .centeredHorizontally())
+        }
+    }
+    
+    static func centeredHorizontally() -> Modifier<Target, UIView> {
+        Modifier { view in
+            HStackView(distribution: .equalSpacing) {
+                UIView().constrain(\.widthAnchor, equalTo: 0)
+                view
+                UIView().constrain(\.widthAnchor, equalTo: 0)
+            }
+        }
+    }
+    
+    static func centeredVertically() -> Modifier<Target, UIView> {
+        Modifier { view in
+            VStackView(distribution: .equalSpacing) {
+                UIView().constrain(\.heightAnchor, equalTo: 0)
+                view
+                UIView().constrain(\.heightAnchor, equalTo: 0)
+            }
+        }
     }
 }
 

@@ -175,7 +175,7 @@ extension Styleable where Self: UIView {
     
     private func activateConstraint(_ constraintBuilder: @escaping @autoclosure () -> NSLayoutConstraint, priority: UILayoutPriority, onNextRunLoop: Bool = false) -> Self {
         let activateBlock = {
-            var constraint = constraintBuilder()
+            let constraint = constraintBuilder()
             constraint.priority = priority
             constraint.isActive = true
         }
