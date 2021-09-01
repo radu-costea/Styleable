@@ -8,10 +8,10 @@
 import Foundation
 
 /// Encapsulates a customization that can be a applied to a any given target.
-public struct Modifier<Target, ModifiedTarget> {
-    public typealias Customization = (Target) -> ModifiedTarget
+public struct Style<Target> {
+    public typealias Customization = (Target) -> Void
     
-    private var customization: Customization
+    private var customization: (Target) -> Void
     
     // MARK: - Lifecycle
     
@@ -23,12 +23,10 @@ public struct Modifier<Target, ModifiedTarget> {
     
     /// Applies the customization to the given target
     /// - Parameter target: The target to be customized
-    public func apply(to target: Target) -> ModifiedTarget {
-        return self.customization(target)
+    public func apply(to target: Target) {
+        self.customization(target)
     }
 }
-
-public typealias Style<Target> = Modifier<Target, Target>
 
 extension Styleable {
     /// Applies the given customizations to self
@@ -38,21 +36,7 @@ extension Styleable {
     /// - Parameter styles: The array of customizations to be applied. 
     /// - Returns: self
     public func style(_ styles: Style<Self>...) -> Self {
-        styles.reduce(self) { $1.apply(to: $0) }
-    }
-    
-    public func modify<ModifiedContent>(_ modifier: Modifier<Self, ModifiedContent>) -> ModifiedContent {
-        modifier.apply(to: self)
-    }
-    
-    func modify<ModifiedContent1: Styleable, ModifiedContent2>(_ modifier1: Modifier<Self, ModifiedContent1>,
-                                                               _ modifier2: Modifier<ModifiedContent1, ModifiedContent2>) -> ModifiedContent2 {
-        self.modify(modifier1).modify(modifier2)
-    }
-    
-    func modify<ModifiedContent1: Styleable, ModifiedContent2: Styleable, ModifiedContent3>(_ modifier1: Modifier<Self, ModifiedContent1>,
-                                                                                           _ modifier2: Modifier<ModifiedContent1, ModifiedContent2>,
-                                                                                           _ modifier3: Modifier<ModifiedContent2, ModifiedContent3>) -> ModifiedContent3 {
-        self.modify(modifier1, modifier2).modify(modifier3)
+        styles.forEach { $0.apply(to: self) }
+        return self
     }
 }
