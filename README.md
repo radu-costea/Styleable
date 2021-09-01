@@ -6,7 +6,7 @@ A declarative alternative to SwiftUI which uses UIKit
 
 **Swift Package Manager (SPM)**
 
-To install StackKit using Swift Package Manager you can follow the tutorial published by Apple using the URL for the Styleable repo with the current version:
+To install Styleable using Swift Package Manager you can follow the tutorial published by Apple using the URL for the Styleable repo with the current version:
 
 \1. In Xcode, select “File” → “Swift Packages” → “Add Package Dependency”
 
